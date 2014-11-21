@@ -52,7 +52,7 @@
     <div class="image" id="box_3"></div>
 </div>
 <script>
-    var main = "upload/";
+    var main = "static/upload/";
     var current = main;
     var _back = [];
     var _last = [];
@@ -100,7 +100,7 @@
         if (_last.length != 0) {
             httpLoad.changestatewhenready("files");
             current = _last[_last.length - 1];
-            httpLoad.send("GET", 'request.php?action=forward&forward=' + current);
+            httpLoad.send("GET", 'requests?action=forward&forward=' + current);
             _back.push(current);
             _last.pop();
         }
@@ -108,7 +108,7 @@
 
     function opendir(dir) {
         httpLoad.changestatewhenready("files");
-        httpLoad.send("GET", '/requests?action=opendir&dir=' + dir + '&current=' + current);
+        httpLoad.send("GET", 'requests?action=opendir&dir=' + dir + '&current=' + current);
         _back.push(current);
         current += dir;
     }
