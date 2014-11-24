@@ -1,18 +1,35 @@
-import os, stat
+import os, stat, shutil
 
 __author__ = 'aaly'
 
 
-class Filebrowser:
+def constant(f):
+    def fset(self, value):
+        raise SyntaxError
+
+    def fget(self):
+        return f()
+
+    return property(fget, fset)
+
+
+class _Const(object):
+    @constant
+    def ABSOLUTE_PATH(self):
+        return os.path.dirname(os.path.abspath(__file__))
+
+
+class Filebrowser(object):
     """A simple example class"""
 
     def __init__(self):
         self.current_dir = ""
 
+
     def out(self):
         paths = self.current_dir.split("/")
-        self.current_dir = "";
-        for i in range(0, len(paths)-2):
+        self.current_dir = ""
+        for i in range(0, len(paths) - 2):
             self.current_dir += paths[i] + "/"
 
     def listElements(self):
@@ -51,3 +68,12 @@ class Filebrowser:
 
     def setCurrentDir(self, current_dir):
         self.current_dir = current_dir
+
+    def move_dir(self, src_dir, dst_dir):
+        shutil.move(src_dir, dst_dir)
+
+    def rename_file(self, old_name, new_name):
+        CONST = _Const()
+        old_fileName = CONST.ABSOLUTE_PATH + "/" + self.current_dir + old_name
+        new_fileName = CONST.ABSOLUTE_PATH + "/" + self.current_dir + new_name
+        shutil.move(old_fileName, new_fileName)
