@@ -62,9 +62,18 @@
     };
 
     function listElements() {
-
         httpLoad.changestatewhenready("files");
         httpLoad.send("GET", '/requests?action=listelements&current=' + current);
+    }
+
+    function rename_file(old_filename, new_filename) {
+        httpLoad.changestatewhenready("files");
+        httpLoad.send("GET", '/requests?action=renameFile&current=' + current + '&oldfileName=' + old_filename + '&newfileName=' + new_filename);
+    }
+
+    function rename_directory(old_dirname, new_dirname) {
+        httpLoad.changestatewhenready("files");
+        httpLoad.send("GET", '/requests?action=renameDir&current=' + current + '&oldDirName=' + old_dirname + '&newDirName=' + new_dirname);
     }
 
     function home() {

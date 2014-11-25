@@ -15,7 +15,7 @@ def constant(f):
 
 class _Const(object):
     @constant
-    def ABSOLUTE_PATH(self):
+    def ABSOLUTE_PATH():
         return os.path.dirname(os.path.abspath(__file__))
 
 
@@ -77,3 +77,9 @@ class Filebrowser(object):
         old_fileName = CONST.ABSOLUTE_PATH + "/" + self.current_dir + old_name
         new_fileName = CONST.ABSOLUTE_PATH + "/" + self.current_dir + new_name
         shutil.move(old_fileName, new_fileName)
+
+    def rename_directory(self, old_name, new_name):
+        CONST = _Const()
+        old_dirName = CONST.ABSOLUTE_PATH + "/" + self.current_dir + old_name
+        new_dirName = CONST.ABSOLUTE_PATH + "/" + self.current_dir + new_name
+        shutil.move(old_dirName, new_dirName)

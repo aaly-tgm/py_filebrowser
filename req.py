@@ -57,6 +57,22 @@ def requests():
         current = request.args.get('current', '')
         f.setCurrentDir(current)
 
+    if action == 'renameFile':
+        current = request.args.get('current', '')
+        old_fileName = request.args.get('oldfileName', '')
+        new_fileName = request.args.get('newfileName', '')
+
+        f.setCurrentDir(current)
+        f.rename_file(old_fileName, new_fileName)
+
+    if action == 'renameDir':
+        current = request.args.get('current', '')
+        old_DirName = request.args.get('oldDirName', '')
+        new_DirName = request.args.get('newDirName', '')
+
+        f.setCurrentDir(current)
+        f.rename_directory(old_DirName, new_DirName)
+
     if action != 'openfile':
         return f.listElements()
 
